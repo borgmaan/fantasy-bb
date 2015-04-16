@@ -1,0 +1,308 @@
+Round: 1
+(1) CJ is my logo - Robinson Cano 2B
+** (2) lightsaber metrics - Adam Jones CF
+(3) Better Safe Than Soria - Hanley Ramirez SS
+(4) Kanye West's Jesus Balks - Adrian Beltre 3B
+(5) Cal Ripbong Jr.  - Adam Wainwright SP
+(6) Sam Cassel  Big Balls Dance - Andrew McCutchen CF
+(7) Chill Outs - Clayton Kershaw SP
+(8) Kolt 'n Bong - Evan Longoria 3B
+(9) Laid Back Brycestyle - Miguel Cabrera 1B
+(10) Unbreakable Shelby Miller - Mike Trout CF
+
+Round: 2
+(11) CJ is my logo - Jose Reyes SS
+** (12) lightsaber metrics - Ryan Braun RF
+(13) Better Safe Than Soria - David Price SP
+(14) Kanye West's Jesus Balks - Troy Tulowitzki SS
+(15) Cal Ripbong Jr.  - Justin Upton LF
+(16) Sam Cassel  Big Balls Dance - Yasiel Puig RF
+(17) Chill Outs - Edwin Encarnacion 1B
+(18) Kolt 'n Bong - Starling Marte LF
+(19) Laid Back Brycestyle - Bryce Harper LF
+(20) Unbreakable Shelby Miller - Anthony Rizzo 1B
+
+Round: 3
+(21) CJ is my logo - Jacoby Ellsbury CF
+** (22) lightsaber metrics - Carlos Santana 3B
+(23) Better Safe Than Soria - Corey Dickerson LF
+(24) Kanye West's Jesus Balks - Max Scherzer SP
+(25) Cal Ripbong Jr.  - Paul Goldschmidt 1B
+(26) Sam Cassel  Big Balls Dance - Felix Hernandez SP
+(27) Chill Outs - Ian Desmond SS
+(28) Kolt 'n Bong - Jose Abreu 1B
+(29) Laid Back Brycestyle - Giancarlo Stanton RF
+(30) Unbreakable Shelby Miller - Anthony Rendon 2B
+
+Round: 4
+(31) CJ is my logo - Victor Martinez DH
+** (32) lightsaber metrics - Corey Kluber SP
+(33) Better Safe Than Soria - Carlos Gonzalez LF
+(34) Kanye West's Jesus Balks - Stephen Strasburg SP
+(35) Cal Ripbong Jr.  - Albert Pujols 1B
+(36) Sam Cassel  Big Balls Dance - Freddie Freeman 1B
+(37) Chill Outs - Jose Altuve 2B
+(38) Kolt 'n Bong - Johnny Cueto SP
+(39) Laid Back Brycestyle - Madison Bumgarner SP
+(40) Unbreakable Shelby Miller - Jose Bautista RF
+
+Round: 5
+(41) CJ is my logo - Zack Greinke SP
+** (42) lightsaber metrics - Ian Kinsler 2B
+(43) Better Safe Than Soria - Adrian Gonzalez 1B
+(44) Kanye West's Jesus Balks - Buster Posey C
+(45) Cal Ripbong Jr.  - Nelson Cruz LF
+(46) Sam Cassel  Big Balls Dance - Michael Brantley LF
+(47) Chill Outs - Josh Donaldson 3B
+(48) Kolt 'n Bong - Carlos Gomez CF
+(49) Laid Back Brycestyle - George Springer RF
+(50) Unbreakable Shelby Miller - Chris Sale SP
+
+Round: 6
+(51) CJ is my logo - Yoenis Cespedes LF
+** (52) lightsaber metrics - Matt Holliday LF
+(53) Better Safe Than Soria - Matt Kemp CF
+(54) Kanye West's Jesus Balks - Jordan Zimmermann SP
+(55) Cal Ripbong Jr.  - Aroldis Chapman RP
+(56) Sam Cassel  Big Balls Dance - David Ortiz DH
+(57) Chill Outs - Cole Hamels SP
+(58) Kolt 'n Bong - Greg Holland RP
+(59) Laid Back Brycestyle - Joey Votto 1B
+(60) Kolt 'n Bong - Brian Dozier 2B
+
+Round: 7
+(61) Kolt 'n Bong - Matt Harvey SP
+(62) Laid Back Brycestyle - Kris Bryant 3B
+(63) Kolt 'n Bong - Jonathan Lucroy C
+(64) Chill Outs - Hunter Pence RF
+(65) Sam Cassel  Big Balls Dance - Craig Kimbrel RP
+(66) Cal Ripbong Jr.  - Jon Lester SP
+(67) Kanye West's Jesus Balks - Billy Hamilton CF
+(68) Better Safe Than Soria - Kyle Seager 3B
+** (69) lightsaber metrics - Ben Zobrist 2B
+(70) CJ is my logo - Jeff Samardzija SP
+
+Round: 8
+(71) CJ is my logo - Sonny Gray SP
+** (72) lightsaber metrics - Starlin Castro SS
+(73) Better Safe Than Soria - Julio Teheran SP
+(74) Kanye West's Jesus Balks - Prince Fielder 1B
+(75) Cal Ripbong Jr.  - Chris Carter DH
+(76) Sam Cassel  Big Balls Dance - Chris Davis 1B
+(77) Chill Outs - Matt Carpenter 3B
+(78) Kolt 'n Bong - Mookie Betts CF
+(79) Laid Back Brycestyle - Nolan Arenado 3B
+(80) Unbreakable Shelby Miller - Jorge Soler RF
+
+Round: 9
+(81) Unbreakable Shelby Miller - Jason Heyward RF
+(82) Laid Back Brycestyle - Gerrit Cole SP
+(83) Kolt 'n Bong - Jacob deGrom SP
+(84) Chill Outs - Dee Gordon 2B
+(85) Sam Cassel  Big Balls Dance - Jason Kipnis 2B
+(86) Cal Ripbong Jr.  - Christian Yelich LF
+(87) Kanye West's Jesus Balks - Dustin Pedroia 2B
+(88) Better Safe Than Soria - Kolten Wong 2B
+** (89) lightsaber metrics - Masahiro Tanaka SP
+(90) CJ is my logo - Kole Calhoun RF
+
+Round: 10
+(91) CJ is my logo - James Shields SP
+** (92) lightsaber metrics - Ryan Zimmerman 3B
+(93) Better Safe Than Soria - Mark Melancon RP
+(94) Kanye West's Jesus Balks - Todd Frazier 3B
+(95) Cal Ripbong Jr.  - Alexei Ramirez SS
+(96) Sam Cassel  Big Balls Dance - Devin Mesoraco C
+(97) Chill Outs - Carlos Carrasco SP
+(98) Kolt 'n Bong - Gregory Polanco RF
+(99) Laid Back Brycestyle - J.D. Martinez LF
+(100) Unbreakable Shelby Miller - Kenley Jansen RP
+
+Round: 11
+(101) Unbreakable Shelby Miller - Manny Machado 3B
+(102) Laid Back Brycestyle - Garrett Richards SP
+(103) Kolt 'n Bong - Gio Gonzalez SP
+(104) Chill Outs - Trevor Rosenthal RP
+(105) Sam Cassel  Big Balls Dance - Alex Gordon LF
+(106) Cal Ripbong Jr.  - Jay Bruce RF
+(107) Kanye West's Jesus Balks - Mark Trumbo 1B
+(108) Better Safe Than Soria - Pablo Sandoval 3B
+** (109) lightsaber metrics - Jayson Werth RF
+(110) CJ is my logo - Tyson Ross SP
+
+Round: 12
+(111) CJ is my logo - Marcell Ozuna CF
+** (112) lightsaber metrics - Jake Arrieta SP
+(113) Better Safe Than Soria - Salvador Perez C
+(114) Kanye West's Jesus Balks - Jonathan Papelbon RP
+(115) Cal Ripbong Jr.  - David Wright 3B
+(116) Sam Cassel  Big Balls Dance - Hisashi Iwakuma SP
+(117) Chill Outs - Brett Gardner CF
+(118) Kolt 'n Bong - Cody Allen RP
+(119) Laid Back Brycestyle - Neil Walker 2B
+(120) Unbreakable Shelby Miller - Evan Gattis C
+
+Round: 13
+(121) Unbreakable Shelby Miller - Shin-Soo Choo LF
+(122) Laid Back Brycestyle - Xander Bogaerts 3B
+(123) Kolt 'n Bong - Daniel Murphy 2B
+(124) Chill Outs - Charlie Blackmon RF
+(125) Sam Cassel  Big Balls Dance - Leonys Martin CF
+(126) Cal Ripbong Jr.  - Homer Bailey SP
+(127) Kanye West's Jesus Balks - Doug Fister SP
+(128) Better Safe Than Soria - Brandon Moss 1B
+** (129) lightsaber metrics - Koji Uehara RP
+(130) CJ is my logo - David Robertson RP
+
+Round: 14
+(131) CJ is my logo - Alex Cobb SP
+** (132) lightsaber metrics - Dellin Betances RP
+(133) Better Safe Than Soria - Michael Wacha SP
+(134) Kanye West's Jesus Balks - Josh Harrison RF
+(135) Cal Ripbong Jr.  - Yan Gomes C
+(136) Sam Cassel  Big Balls Dance - Huston Street RP
+(137) Chill Outs - Lance Lynn SP
+(138) Kolt 'n Bong - Lucas Duda 1B
+(139) Laid Back Brycestyle - Steve Cishek RP
+(140) Unbreakable Shelby Miller - Brandon Belt 1B
+
+Round: 15
+(141) Kolt 'n Bong - Jimmy Rollins SS
+(142) Laid Back Brycestyle - Alex Wood SP
+(143) Kolt 'n Bong - Wil Myers RF
+(144) Chill Outs - Fernando Rodney RP
+(145) Sam Cassel  Big Balls Dance - Adam LaRoche 1B
+(146) Cal Ripbong Jr.  - Elvis Andrus SS
+(147) Kanye West's Jesus Balks - Melky Cabrera LF
+(148) Better Safe Than Soria - Martin Prado 3B
+** (149) lightsaber metrics - Eric Hosmer 1B
+(150) CJ is my logo - Hyun-Jin Ryu SP
+
+Round: 16
+(151) CJ is my logo - Matt Adams 1B
+** (152) lightsaber metrics - Mike Napoli 1B
+(153) Better Safe Than Soria - Chris Archer SP
+(154) Kanye West's Jesus Balks - Pedro Alvarez 3B
+(155) Cal Ripbong Jr.  - Rusney Castillo CF
+(156) Sam Cassel  Big Balls Dance - Anibal Sanchez SP
+(157) Chill Outs - A.J. Pollock CF
+(158) Kolt 'n Bong - Mat Latos SP
+(159) Laid Back Brycestyle - Zach Britton RP
+(160) Unbreakable Shelby Miller - Jose Fernandez SP
+
+Round: 17
+(161) Unbreakable Shelby Miller - Drew Storen RP
+(162) Laid Back Brycestyle - Joc Pederson LF
+(163) Kolt 'n Bong - Justin Morneau 1B
+(164) Chill Outs - Andrew Cashner SP
+(165) Sam Cassel  Big Balls Dance - Collin McHugh SP
+(166) Cal Ripbong Jr.  - Chase Utley 2B
+(167) Kanye West's Jesus Balks - Oswaldo Arcia RF
+(168) Better Safe Than Soria - Curtis Granderson RF
+** (169) lightsaber metrics - Phil Hughes SP
+(170) CJ is my logo - Glen Perkins RP
+
+Round: 18
+(171) CJ is my logo - Alex Rios RF
+** (172) lightsaber metrics - Jake McGee RP
+(173) Better Safe Than Soria - Joaquin Benoit RP
+(174) Kanye West's Jesus Balks - Jered Weaver SP
+(175) Cal Ripbong Jr.  - Justin Verlander SP
+(176) Sam Cassel  Big Balls Dance - Jason Hammel SP
+(177) Chill Outs - Andrew Miller RP
+(178) Kolt 'n Bong - Sean Doolittle RP
+(179) Laid Back Brycestyle - Jean Segura SS
+(180) Unbreakable Shelby Miller - Brett Lawrie 3B
+
+Round: 19
+(181) Unbreakable Shelby Miller - Yordano Ventura SP
+(182) Laid Back Brycestyle - Russell Martin C
+(183) Kolt 'n Bong - Ian Kennedy SP
+(184) Chill Outs - Yadier Molina C
+(185) Sam Cassel  Big Balls Dance - Francisco Rodriguez RP
+(186) Cal Ripbong Jr.  - Aramis Ramirez 3B
+(187) Kanye West's Jesus Balks - Rougned Odor 2B
+(188) Better Safe Than Soria - Ben Revere CF
+** (189) lightsaber metrics - Chase Headley 3B
+(190) CJ is my logo - Francisco Liriano SP
+
+Round: 20
+(191) CJ is my logo - Erick Aybar SS
+** (192) lightsaber metrics - Wilin Rosario C
+(193) Better Safe Than Soria - Aaron Sanchez SP
+(194) Kanye West's Jesus Balks - Nick Castellanos 3B
+(195) Cal Ripbong Jr.  - Joe Nathan RP
+(196) Sam Cassel  Big Balls Dance - Jhonny Peralta SS
+(197) Chill Outs - Jose Quintana SP
+(198) Kolt 'n Bong - Steven Souza RF
+(199) Laid Back Brycestyle - Hector Rondon RP
+(200) Unbreakable Shelby Miller - Danny Santana SS
+
+Round: 21
+(201) Unbreakable Shelby Miller - Danny Salazar SP
+(202) Laid Back Brycestyle - Jake Odorizzi SP
+(203) Kolt 'n Bong - Khris Davis LF
+(204) Chill Outs - Howie Kendrick 2B
+(205) Sam Cassel  Big Balls Dance - Alcides Escobar SS
+(206) Cal Ripbong Jr.  - Carlos Beltran RF
+(207) Kanye West's Jesus Balks - Neftali Feliz RP
+(208) Better Safe Than Soria - Ken Giles RP
+** (209) lightsaber metrics - Yusmeiro Petit RP
+(210) CJ is my logo - Brian McCann C
+
+Round: 22
+(211) CJ is my logo - Joe Mauer 1B
+** (212) lightsaber metrics - Dexter Fowler CF
+(213) Better Safe Than Soria - Rick Porcello SP
+(214) Kanye West's Jesus Balks - Dallas Keuchel SP
+(215) Cal Ripbong Jr.  - Jedd Gyorko 2B
+(216) Sam Cassel  Big Balls Dance - Scott Kazmir SP
+(217) Chill Outs - Matt Wieters C
+(218) Kolt 'n Bong - Adam Eaton CF
+(219) Laid Back Brycestyle - Avisail Garcia RF
+(220) Unbreakable Shelby Miller - Michael Pineda SP
+
+Round: 23
+(221) Unbreakable Shelby Miller - Mike Fiers SP
+(222) Laid Back Brycestyle - Taijuan Walker SP
+(223) Kolt 'n Bong - Shelby Miller SP
+(224) Chill Outs - Austin Jackson CF
+(225) Sam Cassel  Big Balls Dance - Drew Smyly SP
+(226) Cal Ripbong Jr.  - Jenrry Mejia RP
+(227) Kanye West's Jesus Balks - Addison Reed RP
+(228) Better Safe Than Soria - Billy Butler DH
+** (229) lightsaber metrics - Steve Pearce 1B
+(230) CJ is my logo - Wade Davis RP
+
+Round: 24
+(231) CJ is my logo - Coco Crisp CF
+** (232) lightsaber metrics - Nick Markakis RF
+(233) Better Safe Than Soria - Michael Cuddyer RF
+(234) Kanye West's Jesus Balks - Josh Reddick RF
+(235) Cal Ripbong Jr.  - Drew Hutchison SP
+(236) Sam Cassel  Big Balls Dance - Scooter Gennett 2B
+(237) Chill Outs - R.A. Dickey SP
+(238) Laid Back Brycestyle - Marcus Semien 3B
+(239) Unbreakable Shelby Miller - Aaron Hill 2B
+(240) Unbreakable Shelby Miller - Matt Shoemaker SP
+
+Round: 25
+(241) Laid Back Brycestyle - Matt Cain SP
+(242) Chill Outs - Asdrubal Cabrera SS
+(243) Sam Cassel  Big Balls Dance - Santiago Casilla RP
+(244) Cal Ripbong Jr.  - LaTroy Hawkins RP
+(245) Kanye West's Jesus Balks - Javier Baez SS
+(246) Better Safe Than Soria - Tyler Clippard RP
+** (247) lightsaber metrics - Tanner Roark SP
+(248) CJ is my logo - Arismendy Alcantara 2B
+(249) CJ is my logo - Lonnie Chisenhall 3B
+** (250) lightsaber metrics - Brad Boxberger RP
+
+Round: 26
+(251) Better Safe Than Soria - Anthony Gose CF
+(252) Kanye West's Jesus Balks - Lorenzo Cain CF
+(253) Cal Ripbong Jr.  - Kevin Gausman SP
+(254) Sam Cassel  Big Balls Dance - Kyle Hendricks SP
+(255) Chill Outs - Ryan Howard 1B
+(256) Laid Back Brycestyle - Derek Holland SP
+(257) Unbreakable Shelby Miller - James Paxton SP

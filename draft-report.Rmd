@@ -1,0 +1,189 @@
+---
+title: "Draft Report"
+output: 
+  html_document:
+    self_contained: false
+---
+
+## how did i do in my draft
+
+```{r intro, include = FALSE}
+library(ggplot2)
+library(ggthemes)
+library(dplyr)
+library(borgmisc)
+library(reshape2)
+
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, echo=FALSE, fig.align='center',
+                      verbose = TRUE)
+
+all_lines <- readLines('draft-results.txt')
+dat <- readRDS('app-data.rds')
+
+# parse out our draft results
+all_lines <- gsub('\\*\\* ', '', all_lines[grep('\\(', all_lines)])
+dres <- data.frame(
+    
+  # pick number
+  pick_no = sapply(all_lines, function(x) {
+    as.numeric(gsub('\\(', '', strsplit(x, '\\)')[[1]][1]))
+  }),
+  
+  # team
+  owner = sapply(all_lines, function(x) {
+    trim(strsplit(strsplit(x, '\\)')[[1]][2], '-')[[1]][1])
+  }),
+  
+  # pick number
+  full_name = sapply(all_lines, function(x) {
+    spl <- strsplit(trim(strsplit(x, '-')[[1]][2]),'\\ ')[[1]]
+    spl <- spl[-length(spl)]
+    paste(spl, collapse = ' ')
+  }),
+  
+  stringsAsFactors = F
+  
+)
+
+rownames(dres) <- NULL
+
+# translation table for our names
+fn <- c('Laid Back Brycestyle', 'Unbreakable Shelby Miller', "Kolt 'n Bong", 
+        'Sam Cassel  Big Balls Dance', 'Chill Outs', 'Cal Ripbong Jr.', 
+        'Better Safe Than Soria', 'Oak Park Balk of Shame', 
+        'lightsaber metrics', 'CJ is my logo', "Kanye West's Jesus Balks")
+ab <- c('LBB', 'SHLB', 'KB', 'SCBD', 'DUDE', 'WZUP', 'BSTS', 'BOS', 'VORP',
+        'LOVE', 'BOS')
+
+owner_lu <- setNames(ab, fn)
+
+# add draft position to our mapper - and new owner
+dat$hitter_mapper$draft_pos <- NA
+dat$pitcher_mapper$draft_pos <- NA
+
+for (i in 1:nrow(dres)) {
+  hitter_sel <- grep(dres$full_name[i], dat$hitter_mapper$full_name)
+  pitcher_sel <- grep(dres$full_name[i], dat$pitcher_mapper$full_name)
+  
+  # if we didn't find anything
+  if (!length(hitter_sel) & !length(pitcher_sel)) {
+    print('Couldnt found a match for a hitter and a pitcher...')
+    cat('who the fuck is', dres$full_name[i], '\n\n')
+    print(i)
+    print(paste(rep('+', 80), collapse = ''))
+  }  
+    
+  # unique hitter hit
+  if (length(hitter_sel) == 1 & length(pitcher_sel) == 0) {
+    dat$hitter_mapper$draft_pos[hitter_sel] <- dres$pick_no[i]
+    dat$hitter_mapper$curr_owner[hitter_sel] <- owner_lu[dres$owner[i]]
+  } 
+  
+  # unique pitcher hit
+  if (length(hitter_sel) == 0 & length(pitcher_sel) == 1) {
+    dat$hitter_mapper$draft_pos[hitter_sel] <- dres$pick_no[i]
+    dat$hitter_mapper$curr_owner[hitter_sel] <- owner_lu[dres$owner[i]]
+  }
+  
+  # multiple hits
+  if (length(hitter_sel) > 1 | length(pitcher_sel) > 1) {
+    print('Found multiple matches for a hitter or a pitcher...')
+    cat('who the fuck is', dres$full_name[i], '\n\n')
+    print(i)
+    print(paste(rep('+', 80), collapse = ''))
+  }  
+
+}
+
+# [121] "(121) Unbreakable Shelby Miller - Shin-Soo Choo LF"
+dat$hitter_mapper$curr_owner[73] <- owner_lu['Unbreakable Shelby Miller']
+dat$hitter_mapper$draft_pos[39] <- 121
+
+
+# [150] "(150) CJ is my logo - Hyun-Jin Ryu SP"
+dat$pitcher_mapper$curr_owner[39] <- owner_lu['CJ is my logo']
+dat$pitcher_mapper$draft_pos[39] <- 150
+
+
+```
+
+
+## Distribution of My Ranks + Stat Projections (Hitters)
+
+```{r, fig.height=10, fig.width=15}
+hitter_dat <- cbind(
+  dat$hitter_mapper[ ,c("full_name", "team", "curr_owner", "pos_string", "draft_pos")],
+  dat$hitter_rankings,
+  dat$hitter_stats
+  )
+
+hitter_dat <- hitter_dat %>% 
+  mutate(
+    rank_diff = median_rank - draft_pos
+  ) 
+
+meds <- hitter_dat %>% 
+  group_by(curr_owner) %>% 
+  summarize(med = median(median_rank)) %>% 
+  ungroup() %>% 
+  arrange(med)
+
+
+hitter_dat$curr_owner <- factor(hitter_dat$curr_owner, 
+                                levels = meds$curr_owner)
+
+mm <- melt(hitter_dat, id.vars = c("full_name", "team", "curr_owner",
+                                   "pos_string", "draft_pos"))
+
+mm %>% 
+  filter(curr_owner != 'FA') %>% 
+  ggplot(aes(x = curr_owner, y = value, color = curr_owner)) + 
+  facet_wrap(~variable, scales = 'free_y') + 
+  geom_boxplot() + 
+  theme_fivethirtyeight() + 
+  scale_color_brewer(palette = 'Paired', guides(title = '')) + 
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+
+```
+
+
+```{r}
+fas <- hitter_dat %>% 
+  filter(curr_owner == 'FA')
+
+
+```
+
+
+
+## Plotting Draft Position
+
+* At least I stuck to my scheme
+* Tough to improve on the beginn
+
+```{r, fig.height=7, fig.width=8}
+
+hitter_dat %>% 
+  filter(curr_owner != 'FA') %>% 
+    ggplot(aes(x = draft_pos, y = median_rank)) + 
+    geom_point(aes(shape = curr_owner)) + 
+    geom_abline(intercept = 0, slope = 1, linetype = 2) + 
+    ylim(0, 350) +
+    scale_x_continuous(breaks = seq(0,250, 50)) + 
+    scale_y_continuous(breaks = seq(0,250, 50)) + 
+    scale_shape_manual(values = 1:12) +
+    stat_smooth(aes(color = curr_owner), se = FALSE) +
+    theme_fivethirtyeight() + 
+    scale_color_brewer(palette = 'Paired', guides(title = '')) + 
+    ggtitle('Draft Position by Median Rank') + 
+    theme(
+      legend.position = 'bottom',
+      legend.title = element_blank()
+    )
+
+```
+
+
