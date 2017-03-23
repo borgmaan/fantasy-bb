@@ -12,6 +12,12 @@ Player <- R6Class(
     stat_rankings = NA,
     projection_rankings = NA,
     global_fields = NA, # used to store things like ECS & global mWERTH -- full values for cross positional comparison....
+    z_scores = NA,
+    z_sum = NA,
+    boot_z_sum = NA,
+    z_replace = NA,
+    z_vorp = NA,
+    boot_z_vorp = NA,
     
     ## some functions
     set_pos = function(pos_vec) {
@@ -19,7 +25,7 @@ Player <- R6Class(
     },
     
     check_pos = function(to_check) {
-      if (to_check %in% self$positions) return(TRUE)
+      if (any(to_check %in% self$positions)) return(TRUE)
       else return(FALSE)
     },
     
@@ -94,7 +100,11 @@ Hitter <- R6Class(
     hr = NA, 
     r = NA,
     rbi = NA,
-    sb = NA
+    sb = NA,
+    ab = NA,
+    h = NA,
+    xslg = NA,
+    xobp = NA
  
   )
 )
@@ -110,11 +120,16 @@ Pitcher <- R6Class(
     k = NA,
     k9 = NA,
     qs = NA, # quality start
-    saves = NA
-    
-    # functions
-    
-    
+    saves = NA,
+    ip = NA,
+    g = NA,
+    bb = NA,
+    h = NA,
+    er = NA,
+    xera = NA,
+    xwhip = NA,
+    xk9 = NA
+
   )
 )
 
