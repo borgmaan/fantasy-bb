@@ -143,7 +143,6 @@ for (i in 1:nrow(fp_rank)) {
       pitchers[[mm]]$saves <- fp_proj[[i]]$SV
       pitchers[[mm]]$ip <- fp_proj[[i]]$IP
       pitchers[[mm]]$er <- fp_proj[[i]]$ER
-      pitchers[[mm]]$wins <- fp_proj[[i]]$W
       
       # quality starts: http://fantasybaseballcalculator.webs.com/quality-starts-predictor
       # xqs <- (gs / (er * (gs / gp))) * (ip * (gs / gp)) * (((gs + gp) / (2 * GP))^2)
@@ -167,7 +166,7 @@ for (i in 1:nrow(fp_rank)) {
       
       positions <- unname(pos_mapper[unlist(strsplit(fp_rank[i,'position'], ','))])
       new_pitch$set_pos(positions)
-      
+
       pitchers[[fp_rank$player[i]]] <- new_pitch
       pitchers[[fp_rank$player[i]]]$bb <- fp_proj[[i]]$BB
       pitchers[[fp_rank$player[i]]]$h <- fp_proj[[i]]$H
@@ -178,7 +177,6 @@ for (i in 1:nrow(fp_rank)) {
       pitchers[[fp_rank$player[i]]]$saves <- fp_proj[[i]]$SV
       pitchers[[fp_rank$player[i]]]$ip <- fp_proj[[i]]$IP
       pitchers[[fp_rank$player[i]]]$er <- fp_proj[[i]]$ER
-      pitchers[[fp_rank$player[i]]]$wins <- fp_proj[[i]]$W
       
       # quality starts: http://fantasybaseballcalculator.webs.com/quality-starts-predictor
       # xqs <- (gs / (er * (gs / gp))) * (ip * (gs / gp)) * (((gs + gp) / (2 * GP))^2)
@@ -191,7 +189,7 @@ for (i in 1:nrow(fp_rank)) {
       xqscore <- (gs / (er * (gs / gp))) * (ip * (gs / gp)) * (((gs + gp) / (2 * gp))^2)
       xqs <- xqscore / 4.115
       pitchers[[fp_rank$player[i]]]$qs <- xqs
-      
+
     } else {
       # found multiple matches
       message('multiple matches for ', curr_name$fullName)
@@ -210,8 +208,6 @@ for (i in 1:nrow(fp_rank)) {
       hitters[[mm]]$sb <- fp_proj[[i]]$SB
       hitters[[mm]]$slg <- fp_proj[[i]]$SLG
       hitters[[mm]]$r <- fp_proj[[i]]$R
-      hitters[[mm]]$avg <- fp_proj[[i]]$AVG
-      
     } else if (length(mm) == 0) {
       # didn't find match - might need to create new player
       # also might need to check if
@@ -222,7 +218,7 @@ for (i in 1:nrow(fp_rank)) {
       
       positions <- unname(pos_mapper[unlist(strsplit(fp_rank[i,'position'], ','))])
       new_hitter$set_pos(positions)
-      
+
       hitters[[fp_rank$player[i]]] <- new_hitter
       hitters[[fp_rank$player[i]]]$ab <- fp_proj[[i]]$AB
       hitters[[fp_rank$player[i]]]$h <- fp_proj[[i]]$H
@@ -232,7 +228,6 @@ for (i in 1:nrow(fp_rank)) {
       hitters[[fp_rank$player[i]]]$sb <- fp_proj[[i]]$SB
       hitters[[fp_rank$player[i]]]$slg <- fp_proj[[i]]$SLG
       hitters[[fp_rank$player[i]]]$r <- fp_proj[[i]]$R
-      hitters[[fp_rank$player[i]]]$avg <- fp_proj[[i]]$AVG
       
     } else {
       # found multiple matches
@@ -252,7 +247,6 @@ for (i in 1:nrow(fp_rank)) {
 hf <- do.call(rbind, lapply(hitters, function(x) {
   data.frame(
     'ab' = x$get_stats(stat_name = 'ab'), 
-    'avg' = x$get_stats(stat_name = 'avg'),
     'slg' = x$get_stats(stat_name = 'slg'),
     'obp' = x$get_stats(stat_name = 'obp')
   )
@@ -260,12 +254,10 @@ hf <- do.call(rbind, lapply(hitters, function(x) {
 hf$tb <- hf[,'ab'] * hf[,'slg']
 slg_mean <- mean(hf$slg, na.rm = T)
 obp_mean <- mean(hf$obp, na.rm = T)
-avg_mean <- mean(hf$avg, na.rm = T)
 
 for (i in seq_along(hitters)) {
   hitters[[i]]$xslg <- (hitters[[i]]$ab * hitters[[i]]$slg) - (hitters[[i]]$ab * slg_mean)
   hitters[[i]]$xobp <- (hitters[[i]]$ab * hitters[[i]]$obp) - (hitters[[i]]$ab * obp_mean)
-  hitters[[i]]$xavg <- (hitters[[i]]$ab * hitters[[i]]$avg) - (hitters[[i]]$ab * avg_mean)
 }
 
 
@@ -274,14 +266,12 @@ hp <- do.call(rbind, lapply(hitters, function(x) {
     slg = x$slg,
     xslg = x$xslg,
     obp = x$obp,
-    xopb = x$xobp,
-    avg = x$avg,
-    xavg = x$xavg
+    xopb = x$xobp
   )
 }))
 plot(hp[,'xslg']~hp[,'slg'])
 plot(hp[,'xopb']~hp[,'obp'])
-plot(hp[,'xavg']~hp[,'avg'])
+
 
 # xERA = ( ER - (IP * league_average) ) * -1
 # xWHIP - ( (BB + H) - (IP * league_average) ) * -1
@@ -321,7 +311,7 @@ plot(pp[, 'xwhip'] ~ pp[, 'whip'])
 
 
 ## compute relevant player pool prior to z-scoring....
-hstats <- c('hr', 'r', 'rbi', 'sb', 'xavg')
+hstats <- c('hr', 'r', 'rbi', 'sb', 'xslg', 'xobp')
 hd <- do.call(rbind, lapply(hitters, function(x){
   sapply(hstats, function(y) x$get_stats(y))
 }))
@@ -332,12 +322,12 @@ hd <- hd[is.finite(hd[,'hr']),]
 hds <- scale(hd)
 ord <- order(rowSums(hds), decreasing = T)
 
-pdf('reports/2017-category-z-scores-league-2.pdf', height = 20, width = 2)
+pdf('reports/2017-category-z-scores.pdf', height = 20, width = 2.5)
 heat_misc(hds[ord,], z_score = F, axis_scale = .4, row_clust = F)
 dev.off()
 
 
-pstats <- c('k', 'wins', 'saves', 'xera', 'xwhip')
+pstats <- c('k', 'k9', 'qs', 'saves', 'xera', 'xwhip')
 pd <- do.call(rbind, lapply(pitchers, function(x){
   sapply(pstats, function(y) x$get_stats(y))
 }))
@@ -348,7 +338,7 @@ pds <- scale(pd)
 fp <- plyr::rbind.fill(data.frame(hds), data.frame(pds))
 rownames(fp) = c(rownames(hds), rownames(pds))
 ord <- order(rowSums(fp, na.rm = T), decreasing = T)
-pdf('reports/2017-category-z-scores-all-league-2.pdf', height = 40, width = 2.5)
+pdf('reports/2017-category-z-scores-all.pdf', height = 40, width = 2.5)
 heat_misc(fp[ord,], z_score = F, axis_scale = .4, row_clust = F, col_clust = F)
 dev.off()
 
@@ -502,14 +492,6 @@ updated_players <- c(hitters, pitchers)
 
 
 
-sp_locs <- sapply(updated_players, function(x) x$check_pos('SP'))
-sp_locs <- which(sp_locs)
-rp_locs <- sapply(updated_players, function(x) x$check_pos('RP'))
-rp_locs <- which(rp_locs)
-
-
-
-
 # compute our raw z-scores for each player
 ## our batting categories: R, HR, RBI, SB, OBP, SLG
 ## our pitching categories: K, QS, SV, ERA, WHIP, K/9
@@ -519,18 +501,16 @@ zframe <- do.call(rbind, lapply(updated_players, function(x) {
     'hr' = x$get_stats(stat_name = 'hr'),
     'rbi' = x$get_stats(stat_name = 'rbi'),
     'sb' = x$get_stats(stat_name = 'sb'),
-    'xavg' = x$get_stats(stat_name = 'xavg'),
-    'wins' = x$get_stats(stat_name = 'wins'), 
-    'k' = x$get_stats(stat_name = 'k'),
+    'xslg' = x$get_stats(stat_name = 'xslg'),
+    'xobp' = x$get_stats(stat_name = 'xobp'),
+    'k' = x$get_stats(stat_name = 'k'), 
+    'qs' = x$get_stats(stat_name = 'qs'),
     'saves' = x$get_stats(stat_name = 'saves'),
     'xera' = x$get_stats(stat_name = 'xera'),
-    'xwhip' = x$get_stats(stat_name = 'xwhip')
+    'xwhip' = x$get_stats(stat_name = 'xwhip'),
+    'xk9' = x$get_stats(stat_name = 'xk9')
   )
 }))
-
-zframe[sp_locs, 'saves'] <- NA
-zframe[rp_locs, 'wins'] <- NA
-
 zmeans <- apply(zframe, 2, mean, na.rm = T)
 zsds <- apply(zframe, 2, sd, na.rm = T)
 
@@ -541,10 +521,11 @@ for (i in seq_along(updated_players)) {
     if (is.null(updated_players[[i]]$qs) | !length(updated_players[[i]]$qs)) updated_players[[i]]$qs <- rep(0, length(updated_players[[i]]$k))
     updated_players[[i]]$z_scores <- data.frame(
       k = (updated_players[[i]]$k - zmeans['k']) / zsds['k'],
+      qs = (updated_players[[i]]$qs - zmeans['qs']) / zsds['qs'],
       saves = (updated_players[[i]]$saves - zmeans['saves']) / zsds['saves'],
       xera = (updated_players[[i]]$xera - zmeans['xera']) / zsds['xera'],
       xwhip = (updated_players[[i]]$xwhip - zmeans['xwhip']) / zsds['xwhip'],
-      wins = (updated_players[[i]]$wins - zmeans['wins']) / zsds['wins']
+      xk9 = (updated_players[[i]]$xk9 - zmeans['xk9']) / zsds['xk9']
     )
   } else {
     try({
@@ -553,7 +534,8 @@ for (i in seq_along(updated_players)) {
         hr = (updated_players[[i]]$hr - zmeans['hr']) / zsds['hr'],
         rbi = (updated_players[[i]]$rbi - zmeans['rbi']) / zsds['rbi'],
         sb = (updated_players[[i]]$sb - zmeans['sb']) / zsds['sb'],
-        xavg = (updated_players[[i]]$avg - zmeans['xavg']) / zsds['xavg']
+        xslg = (updated_players[[i]]$xslg - zmeans['xslg']) / zsds['xslg'],
+        xobp = (updated_players[[i]]$xobp - zmeans['xobp']) / zsds['xobp']
       )
     })
   }
@@ -632,8 +614,6 @@ replace_vals <- do.call(rbind, lapply(seq_along(plu), function(i) {
   data.frame(position = curr_pos, replacement_z = pos_zs[replace_idx])
 }))
 
-# replace_vals$replacement_z[7:8] <- 1
-
 # set replacemnet level for each player
 for (i in seq_along(updated_players)) {
   sel <- which(replace_vals$position %in% updated_players[[i]]$positions)
@@ -653,7 +633,7 @@ for (i in seq_along(updated_players)) {
 zvorps <- sapply(updated_players, function(x) x$get_stats('z_vorp'))
 pord <- order(zvorps, decreasing = T)
 
-league_stats <- c("hr", "r", "rbi", "sb", "xavg", "k", "wins", "saves", "xera")
+league_stats <- c("hr", "r", "rbi", "sb", "xslg", "xobp", "k", "k9", "qs", "saves", "xera", "xwhip")
 for_plot <- do.call(rbind, lapply(updated_players, function(x){
   sapply(league_stats, function(y) x$get_stats(y))
 }))
@@ -661,7 +641,7 @@ rownames(for_plot) <- sapply(updated_players, function(x) paste(x$first_name, x$
 for_plot2 <- for_plot[pord, ]
 for_plot2 <- scale(for_plot2)
 
-pdf('reports/2017-category-z-scores-pos-adj-league-2.pdf', height = 60, width = 2.3)
+pdf('reports/2017-category-z-scores-pos-adj.pdf', height = 60, width = 2.3)
 heat_misc(for_plot2, z_score = F, axis_scale = .4, row_clust = F, col_clust = F)
 dev.off()
 
@@ -702,7 +682,7 @@ for (i in seq_along(updated_players)) {
 }
 
 
-saveRDS(updated_players, 'projections/2017/2017-projections-final-league-2.rds')
+saveRDS(updated_players, 'projections/2017/2017-projections-final.rds')
 
 nn <- sapply(updated_players, function(x) {
   paste(x$first_name, x$last_name)
@@ -710,78 +690,46 @@ nn <- sapply(updated_players, function(x) {
 names(updated_players) <- nn
 
 # set all our keeper manually.... there aren't that many
-updated_players$`Manny Machado`$curr_owner <- "JoshGinsberg"
-updated_players$`Freddie Freeman`$curr_owner <- "Faisal"
-updated_players$`DJ LeMahieu`$curr_owner <- "Jason"
-updated_players$`Charlie Blackmon`$curr_owner <- "Joe"
-updated_players$`Christian Yelich`$curr_owner <- "Dan"
-updated_players$`Xander Bogaerts`$curr_owner <- "JoshGinsberg"
-updated_players$`Anthony Rendon`$curr_owner <- "JoshGinsberg"
-updated_players$`Daniel Murphy`$curr_owner <- "Matt"
-updated_players$`Hanley Ramirez`$curr_owner <- "Andrew"
-updated_players$`Francisco Lindor`$curr_owner <- "Dan"
-updated_players$`Billy Hamilton`$curr_owner <- "Joe"
-updated_players$`Danny Duffy`$curr_owner <- "Tom"
-updated_players$`Dustin Pedroia`$curr_owner <- "Andrew"
-updated_players$`Noah Syndergaard`$curr_owner <- "Dan"
-updated_players$`Willson Contreras`$curr_owner <- "Faisal"
-updated_players$`Corey Seager`$curr_owner <- "MarkDonnelly"
-updated_players$`Seung-Hwan Oh`$curr_owner <- "Matt"
-updated_players$`A.J. Pollock`$curr_owner <- "Brett"
-updated_players$`Odubel Herrera`$curr_owner <- "Brett"
-updated_players$`Carlos Correa`$curr_owner <- "Tom"
-updated_players$`Evan Longoria`$curr_owner <- "Jason"
-updated_players$`Andrew Benintendi`$curr_owner <- "Andrew"
-updated_players$`Yu Darvish`$curr_owner <- "Joe"
-updated_players$`Jose Ramirez`$curr_owner <- "Faisal"
-updated_players$`Kyle Hendricks`$curr_owner <- "MarkDonnelly"
-updated_players$`Jean Segura`$curr_owner <- "Mark Brown"
-updated_players$`Jose Quintana`$curr_owner <- "Matt"
-updated_players$`Eduardo Nunez`$curr_owner <- "Brett"
-updated_players$`Alex Bregman`$curr_owner <- "Tom"
-updated_players$`J.T. Realmuto`$curr_owner <- "Jason"
-updated_players$`Stephen Piscotty`$curr_owner <- "Andrew"
-updated_players$`Wil Myers`$curr_owner <- "Dan"
-updated_players$`Jonathan Villar`$curr_owner <- "Joe"
-updated_players$`Trevor Story`$curr_owner <- "Faisal"
-updated_players$`Gary Sanchez`$curr_owner <- "MarkDonnelly"
-updated_players$`Roberto Osuna`$curr_owner <- "Mark Brown"
-updated_players$`Mark Trumbo`$curr_owner <- "Matt"
-updated_players$`Jackie Bradley`$curr_owner <- "Brett"
-updated_players$`Trea Turner`$curr_owner <- "Tom"
+updated_players$`Joey Votto`$curr_owner  <- "HGH"
+updated_players$`Mike Trout`$curr_owner  <- "RIZZ"
+updated_players$`Paul Goldschmidt`$curr_owner  <- "PUNK"
+updated_players$`Bryce Harper`$curr_owner  <- "DCS"
+updated_players$`Josh Donaldson`$curr_owner  <- "SHTY"
+updated_players$`Anthony Rizzo`$curr_owner  <- "RIZZ"
+updated_players$`Freddie Freeman`$curr_owner  <- "PUIG"
+updated_players$`Miguel Cabrera`$curr_owner  <- "DCS"
+updated_players$`Jose Altuve`$curr_owner  <- "SHTY"
+updated_players$`Kris Bryant`$curr_owner  <- "DCS"
+updated_players$`Buster Posey`$curr_owner  <- "BRAH"
+updated_players$`George Springer`$curr_owner  <- "ROWL"
+updated_players$`Edwin Encarnacion`$curr_owner  <- "SHTY"
+updated_players$`Charlie Blackmon`$curr_owner  <- "PUNK"
+updated_players$`Mookie Betts`$curr_owner  <- "BULL"
+updated_players$`Carlos Correa`$curr_owner  <- "DCS"
+updated_players$`Kyle Schwarber`$curr_owner  <- "ROWL"
+updated_players$`Francisco Lindor`$curr_owner  <- "BULL"
+updated_players$`Nolan Arenado`$curr_owner  <- "HGH"
+updated_players$`Xander Bogaerts`$curr_owner  <- "RIZZ"
+updated_players$`Kyle Seager`$curr_owner  <- "ROWL"
+updated_players$`Corey Seager`$curr_owner  <- "ROWL"
+updated_players$`Manny Machado`$curr_owner  <- "RIZZ"
+updated_players$`Starling Marte`$curr_owner  <- "BULL"
+updated_players$`Ryan Braun`$curr_owner  <- "RIZZ"
+updated_players$`Giancarlo Stanton`$curr_owner  <- "DCS"
+updated_players$`Robinson Cano`$curr_owner  <- "ROWL"
+updated_players$`A.J. Pollock`$curr_owner  <- "ROWL"
+updated_players$`Ian Kinsler`$curr_owner  <- "BRAH"
+updated_players$`Trea Turner`$curr_owner  <- "PUIG"
+updated_players$`Trevor Story`$curr_owner  <- "PUNK"
+updated_players$`Todd Frazier`$curr_owner  <- "BRAH"
+updated_players$`Max Scherzer`$curr_owner  <- "BRAH"
+updated_players$`Clayton Kershaw`$curr_owner  <- "SHTY"
+updated_players$`Madison Bumgarner`$curr_owner  <- "DCS"
+updated_players$`Chris Sale`$curr_owner  <- "BULL"
+updated_players$`Noah Syndergaard`$curr_owner  <- "BULL"
 
-saveRDS(updated_players, 'projections/2017/2017-projections-final-league-2.rds')
+saveRDS(updated_players, 'projections/2017/2017-projections-final-keepers.rds')
 
 
-
-#####
-# can we adjust any of the z-scores
-#####
-
-
-zdists <- do.call(plyr::rbind.fill, lapply(updated_players, function (x) {
-  tryCatch(expr = {
-    data.frame(x$z_scores)
-  }, 
-  error = function(e) {
-    return(NULL)
-  }
-  )
-}))
-
-zdists <- do.call(rbind, lapply(updated_players, function (x) {
-  tryCatch(expr = {
-    data.frame(
-      pos = paste(x$positions, collapse = ','),
-      zs = x$z_scores
-    )
-    }, 
-    error = function(e) {
-      return(NULL)
-    }
-    )
-}))
-
-boxplot(zs~pos, data = zdists, las = 2)
 
 
