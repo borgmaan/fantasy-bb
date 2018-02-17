@@ -7,9 +7,11 @@ library(sparkline)
 source('../src/player-classes.R', local = T)
 source('app-helpers.R', local = T)
 
- dat <- readRDS('../projections/2016/2016-projections-final.rds')
+ # dat <- readRDS('../projections/2016/2016-projections-final.rds')
+dat <- readRDS('../projections/2017/2017-projections-final-keepers.rds')
 names(dat) <- sapply(dat, function(x) paste(x$first_name, x$last_name))
-teams <- c("RIZZ", "CBB", "WZUP", "DUDE", "PUIG", "BOS", "PRTY", "BSTS", "ROWL", "HGH")
+teams <- c("RIZZ", "ECG", "DCS", "PUNK", "SHTY", "ROWL", "PUIG", "BRAH", 
+           "BULL", "HGH")
 all_positions <- c("SP", "RP", "1B", "3B", "2B", "SS", "OF", "C", "DH")
 hitter_positions <- c("1B", "3B", "2B", "SS", "OF", "C", "DH")
 pitcher_positions <- c("SP", "RP")
@@ -20,9 +22,6 @@ box_string <- "type: 'box', lineColor: 'black', whiskerColor: 'black', outlierFi
 cb_box2 = JS(paste0("function (oSettings, json) { $('.spark:not(:has(canvas))').sparkline('html', { ", 
                     box_string, ", chartRangeMin: ", r[1], ", chartRangeMax: ", r[2], " }); }"), 
              collapse = "")
-
-
-
 
 
 shinyServer(
