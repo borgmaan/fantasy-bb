@@ -96,6 +96,7 @@ Hitter <- R6Class(
     
     # our fields
     obp = NA,
+    avg = NA,
     slg = NA,
     hr = NA, 
     r = NA,
@@ -104,7 +105,8 @@ Hitter <- R6Class(
     ab = NA,
     h = NA,
     xslg = NA,
-    xobp = NA
+    xobp = NA,
+    xavg = NA
  
   )
 )
@@ -120,6 +122,7 @@ Pitcher <- R6Class(
     k = NA,
     k9 = NA,
     qs = NA, # quality start
+    wins = NA,
     saves = NA,
     ip = NA,
     g = NA,
