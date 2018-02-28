@@ -5,3 +5,13 @@ projections/
 .Rproj.user
 .Rhistory
 .RData
+*.rds
+!spec/*.rds
+*.pdf
+!spec/*.pdf
+*.png
+!spec/*.png
+*.xlsx
+!spec/*.xlsx
+*.csv
+!spec/*.csv

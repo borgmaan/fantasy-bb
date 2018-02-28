@@ -1,0 +1,55 @@
+---
+title: "In-Season Update"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+library(ggthemes)
+library(dplyr)
+library(borgmisc)
+library(reshape2)
+
+
+std <- read.delim('../standings/2015-04-19-standings.tsv')
+dat <- readRDS('../app-data.rds')
+
+
+fn <- c('Laid Back Brycestyle', 'Unbreakable Shelby Miller', "Kolt 'n Bong", 
+        'Sam Cassel  Big Balls Dance', 'Chill Outs', 'Cal Ripbong Jr.', 
+        'Better Safe Than Soria', 'Oak Park Balk of Shame', 
+        'lightsaber metrics', 'CJ is my logo', "Kanye West's Jesus Balks")
+ab <- c('LBB', 'SHLB', 'KB', 'SCBD', 'DUDE', 'WZUP', 'BSTS', 'BOS', 'VORP',
+        'LOVE', 'BOS')
+
+owner_lu <- setNames(ab, fn)
+
+
+```
+
+
+### make roto scores
+
+```{r}
+
+roto <- data.frame(
+  "Team" = std[["Team"]], 
+  "R" = rank(std[["R"]]), 
+  "HR" = rank(std[["HR"]]), 
+  "RBI" = rank(std[["RBI"]]), 
+  "SB" = rank(std[["SB"]]), 
+  "OBP" = rank(std[["OBP"]]), 
+  "SLG" = rank(std[["SLG"]]), 
+  "K" = rank(std[["K"]]), 
+  "QS" = rank(std[["QS"]]), 
+  "SV" = rank(std[["SV"]]), 
+  "ERA" = rank(-std[["ERA"]]), 
+  "WHIP" = rank(-std[["WHIP"]]), 
+  "K.9" = rank(std[["K.9"]])
+)
+
+
+sort(setNames(rowSums(roto[,-1]), roto[,1]))
+
+
+```

@@ -1,0 +1,111 @@
+---
+title: "Strengh of Schedule"
+author: "Co-Mericans"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: html_document
+---
+
+```{r config, include=FALSE}
+library(ggplot2)
+library(reshape2)
+library(borgmisc)
+library(dplyr)
+
+sos_files <- dir(pattern = '^week')
+
+parse_h2h <- function(f) {
+  vals <- readLines(f)
+  headers <- read.delim(textConnection(grep('NAME', vals, value = T)[1]))
+  game_scores <- read.delim(textConnection(grep('(TEAM)|(NAME)|(Full)|(Column)', vals, invert = T, value = T)), 
+                            header = F, stringsAsFactors = F)
+  
+  names(game_scores) <- names(headers)
+  game_scores <- game_scores[,-grep('^X', names(game_scores))]
+  
+  ix1 <- seq(1, 9, 2)
+  ix2 <- seq(2, 10, 2)
+  ix3 <- vector('numeric')
+  for (i in seq_along(ix1)) ix3 <- c(ix3, ix2[i], ix1[i])
+
+  game_scores$NAME <- trim(sapply(strsplit(game_scores$NAME, '\\('), '[', 1))
+  game_scores$opponent <- game_scores$NAME[ix3]
+  game_scores$week <- f
+  game_scores
+  
+}
+
+all_scores <- do.call(rbind, lapply(sos_files, parse_h2h))
+
+mm <- melt(all_scores, id.vars = c("NAME", "SCORE", "opponent", "week"))
+
+# ggplot(mm, aes(x = week, y = value, color = NAME, group = NAME)) +
+#   geom_line() +
+#   facet_wrap(~variable, scales = 'free_y') + 
+#   scale_color_brewer(palette = "Paired")
+```
+
+## Distributions of Team's Weekly Category Totals
+
+Below are some boxplots showing the distribution of each team's weekly category totals.There are some fun things to see here (in our very small sample size). 
+
+- Megan's team loves to steal 3 bases (7/11 weeks)
+- Luke's strategy (I think it's a strategy) of carefully deploying his pitchers gives him pitifully low K & QS totals, but does appear to be working for ERA & WHIP
+- CJ needs some help in the counting categories
+- Andrew is consistently bad at getting on base
+
+```{r}
+ggplot(mm, aes(x = NAME, y = value, color = NAME)) +
+  geom_boxplot() +
+  facet_wrap(~variable, scales = 'free_y') + 
+  scale_color_brewer(palette = "Paired") + 
+  theme(axis.text.x = element_blank())
+```
+
+
+## Distributions of Team's Opponents Weekly Category Totals
+
+We want to examine if there is any bias in the strength of schedule teams have faced to date. Are certain teams facing opponents who are consistently lighting them up in certain categories? And does that even matter?
+
+The boxplots below show the distribution of weekly category totals for each team's *opponents*. We'd expect to see uniform distributions for each team if no bias existed. 
+
+Some things to note:
+
+- Teams seem to accumulate a lot of home runs and RBIs against CJ -- which is a waste because those are some of his weakest categories. 
+- Teams steal a lot of bases against Thomas and barely any against John
+- Teams record high SLG against Andrew, which is one of his weakest categories. 
+
+
+```{r}
+ggplot(mm, aes(x = opponent, y = value, color = opponent)) +
+  geom_boxplot() +
+  facet_wrap(~variable, scales = 'free_y') + 
+  scale_color_brewer(palette = "Paired") + 
+  theme(axis.text.x = element_blank())
+
+```
+
+
+
+
+## Roto Scores
+
+We can estimate how difficult a teams schedule has been by creating a roto score based on their opponent's scores against them. 
+
+
+```{r}
+
+opp_sum <- mm %>% 
+  group_by(opponent, variable) %>% 
+  summarise(total = sum(value))
+  
+opp_roto <- tidyr::spread(opp_sum, opponent, total)
+
+
+
+
+```
+
+
+
+
+

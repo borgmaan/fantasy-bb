@@ -71,7 +71,8 @@ get_team <- function(dat, team) {
 
 # project standings based off of mean of projections and picks thus far
 project_standings <- function(dat) {
-  teams <- c("RIZZ", "CBB", "WZUP", "DUDE", "PUIG", "BOS", "PRTY", "BSTS", "ROWL", "HGH")
+  teams <- c("RIZZ", "ECG", "DCS", "PUNK", "SHTY", "ROWL", "PUIG", "BRAH", 
+             "BULL", "HGH")
   stats <- c("r", "hr", "rbi", "sb", "xslg", "xobp", "k", "qs", 
     "saves", "xera", "xwhip", "xk9")
 

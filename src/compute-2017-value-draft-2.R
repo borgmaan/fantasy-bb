@@ -544,7 +544,7 @@ for (i in seq_along(updated_players)) {
       saves = (updated_players[[i]]$saves - zmeans['saves']) / zsds['saves'],
       xera = (updated_players[[i]]$xera - zmeans['xera']) / zsds['xera'],
       xwhip = (updated_players[[i]]$xwhip - zmeans['xwhip']) / zsds['xwhip'],
-      wins = (updated_players[[i]]$xk9 - zmeans['wins']) / zsds['wins']
+      wins = (updated_players[[i]]$wins - zmeans['wins']) / zsds['wins']
     )
   } else {
     try({
@@ -553,7 +553,7 @@ for (i in seq_along(updated_players)) {
         hr = (updated_players[[i]]$hr - zmeans['hr']) / zsds['hr'],
         rbi = (updated_players[[i]]$rbi - zmeans['rbi']) / zsds['rbi'],
         sb = (updated_players[[i]]$sb - zmeans['sb']) / zsds['sb'],
-        xavg = (updated_players[[i]]$xslg - zmeans['xavg']) / zsds['xavg']
+        xavg = (updated_players[[i]]$xavg - zmeans['xavg']) / zsds['xavg']
       )
     })
   }
