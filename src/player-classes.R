@@ -4,6 +4,7 @@ Player <- R6Class(
   public = list(
     
     ## our fields
+    MLBAMID = NA,
     first_name = NA, 
     last_name = NA,
     team = NA,
