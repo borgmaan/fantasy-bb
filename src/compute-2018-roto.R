@@ -486,6 +486,7 @@ for (i in seq_along(updated_players)) {
 
 
 saveRDS(updated_players, 'projections/2018/2018-projections-final-league-2.rds')
+# updated_players <- readRDS('projections/2018/2018-projections-final-league-2.rds')
 
 nn <- sapply(updated_players, function(x) {
   paste(x$first_name, x$last_name)
@@ -796,48 +797,77 @@ nn <- sapply(updated_players, function(x) {
 })
 names(updated_players) <- nn
 
-# set all our keeper manually.... there aren't that many
-updated_players$`Manny Machado`$curr_owner <- "JoshGinsberg"
-updated_players$`Freddie Freeman`$curr_owner <- "Faisal"
-updated_players$`DJ LeMahieu`$curr_owner <- "Jason"
-updated_players$`Charlie Blackmon`$curr_owner <- "Joe"
-updated_players$`Christian Yelich`$curr_owner <- "Dan"
-updated_players$`Xander Bogaerts`$curr_owner <- "JoshGinsberg"
-updated_players$`Anthony Rendon`$curr_owner <- "JoshGinsberg"
-updated_players$`Daniel Murphy`$curr_owner <- "Matt"
-updated_players$`Hanley Ramirez`$curr_owner <- "Andrew"
-updated_players$`Francisco Lindor`$curr_owner <- "Dan"
-updated_players$`Billy Hamilton`$curr_owner <- "Joe"
-updated_players$`Danny Duffy`$curr_owner <- "Tom"
-updated_players$`Dustin Pedroia`$curr_owner <- "Andrew"
-updated_players$`Noah Syndergaard`$curr_owner <- "Dan"
-updated_players$`Willson Contreras`$curr_owner <- "Faisal"
-updated_players$`Corey Seager`$curr_owner <- "MarkDonnelly"
-updated_players$`Seung-Hwan Oh`$curr_owner <- "Matt"
-updated_players$`A.J. Pollock`$curr_owner <- "Brett"
-updated_players$`Odubel Herrera`$curr_owner <- "Brett"
-updated_players$`Carlos Correa`$curr_owner <- "Tom"
-updated_players$`Evan Longoria`$curr_owner <- "Jason"
-updated_players$`Andrew Benintendi`$curr_owner <- "Andrew"
-updated_players$`Yu Darvish`$curr_owner <- "Joe"
-updated_players$`Jose Ramirez`$curr_owner <- "Faisal"
-updated_players$`Kyle Hendricks`$curr_owner <- "MarkDonnelly"
-updated_players$`Jean Segura`$curr_owner <- "Mark Brown"
-updated_players$`Jose Quintana`$curr_owner <- "Matt"
-updated_players$`Eduardo Nunez`$curr_owner <- "Brett"
-updated_players$`Alex Bregman`$curr_owner <- "Tom"
-updated_players$`J.T. Realmuto`$curr_owner <- "Jason"
-updated_players$`Stephen Piscotty`$curr_owner <- "Andrew"
-updated_players$`Wil Myers`$curr_owner <- "Dan"
-updated_players$`Jonathan Villar`$curr_owner <- "Joe"
-updated_players$`Trevor Story`$curr_owner <- "Faisal"
-updated_players$`Gary Sanchez`$curr_owner <- "MarkDonnelly"
-updated_players$`Roberto Osuna`$curr_owner <- "Mark Brown"
-updated_players$`Mark Trumbo`$curr_owner <- "Matt"
-updated_players$`Jackie Bradley`$curr_owner <- "Brett"
-updated_players$`Trea Turner`$curr_owner <- "Tom"
+# Sachin: RO needs a Closer
+# Christian: Jobu Needs a Refill
+# Josh: Oh no he didn't
+# Mark Donnelly: Car Ram Rod 
+# Bull Dozier: Brett Wilson
+# Oh No You Di'int: Joshua Sanborn 
+# Pedro gives me a Hardy Johnson: Joshua Ginsberg
+# It's Wattles ....bitches: Tom Wattles 
+# Defending Bronze Medalist: Matt Sterling
+# Cottage Cheese Industry: Joe Finland 
+# SaNo Means Yes: Faisal Khan
+# Judge, Jury and Executioner: christian
+# Jobu Needs A Refill: Sachin K
+lu <- function(nme) {
+  grep(nme, nn)
+}
 
-saveRDS(updated_players, 'projections/2017/2017-projections-final-league-2.rds')
+# set all our keeper manually.... there aren't that many
+updated_players$`Cody Bellinger`$curr_owner <- "It's Wattles ....bitches"
+updated_players$`Luis Severino`$curr_owner <- "It's Wattles ....bitches"
+updated_players$`Matt Olson`$curr_owner <- "It's Wattles ....bitches"
+updated_players$`Ozzie Albies`$curr_owner <- "It's Wattles ....bitches"
+
+updated_players$`Giancarlo Stanton`$curr_owner <- "Bull Dozier"
+updated_players$`Yasiel Puig`$curr_owner <- "Bull Dozier"
+updated_players$`Eddie Rosario`$curr_owner <- "Bull Dozier"
+
+updated_players$`Elvis Andrus`$curr_owner <- "Defending Bronze Medalist"
+updated_players$`Jose Quintana`$curr_owner <- "Defending Bronze Medalist"
+updated_players$`Raisel Iglesias`$curr_owner <- "Defending Bronze Medalist"
+updated_players$`Brett Gardner`$curr_owner <- "Defending Bronze Medalist"
+
+updated_players$`Andrew Benintendi`$curr_owner <- "Me"
+updated_players$`Trea Turner`$curr_owner <- "Me"
+
+updated_players$`Marcell Ozuna`$curr_owner <- "Pedro gives me a Hardy Johnson"
+updated_players$`Mike Moustakas`$curr_owner <- "Pedro gives me a Hardy Johnson"
+updated_players$`Aaron Nola`$curr_owner <- "Pedro gives me a Hardy Johnson"
+
+updated_players$`Gary Sanchez`$curr_owner <- "Car Ram Rod"
+updated_players$`Tommy Pham`$curr_owner <- "Car Ram Rod"
+updated_players$`Whit Merrifield`$curr_owner <- "Car Ram Rod"
+updated_players$`Rhys Hoskins`$curr_owner <- "Car Ram Rod"
+
+updated_players$`Willson Contreras`$curr_owner <- "SaNo Means Yes"
+updated_players$`Jose Ramirez`$curr_owner <- "SaNo Means Yes"
+updated_players$`Trevor Story`$curr_owner <- "SaNo Means Yes"
+updated_players$`Paul DeJong`$curr_owner <- "SaNo Means Yes"
+
+updated_players$`Billy Hamilton`$curr_owner <- "Cottage Cheese Industry"
+updated_players$`Yu Darvish`$curr_owner <- "Cottage Cheese Industry"
+
+updated_players$`Byron Buxton`$curr_owner <- "Judge, Jury and Executioner"
+updated_players$`Aaron Judge`$curr_owner <- "Judge, Jury and Executioner"
+updated_players$`Alex Bregman`$curr_owner <- "Judge, Jury and Executioner"
+updated_players$`Rafael Devers`$curr_owner <- "Judge, Jury and Executioner"
+
+updated_players$`Jonathan Schoop`$curr_owner <- "Oh No You Di'int"
+updated_players$`Travis Shaw`$curr_owner <- "Oh No You Di'int"
+updated_players$`Jake Lamb`$curr_owner <- "Oh No You Di'int"
+updated_players$`Jay Bruce`$curr_owner <- "Oh No You Di'int"
+
+updated_players$`Christian Yelich`$curr_owner <- "Jobu Needs A Refill"
+updated_players$`Wil Myers`$curr_owner <- "Jobu Needs A Refill"
+updated_players$`Robbie Ray`$curr_owner <- "Jobu Needs A Refill"
+updated_players$`James Paxton`$curr_owner <- "Jobu Needs A Refill"
+
+
+
+
+saveRDS(updated_players, 'projections/2018/2018-league-2-draft.rds')
 
 
 
