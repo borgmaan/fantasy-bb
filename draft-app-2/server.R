@@ -8,12 +8,14 @@ source('../src/player-classes.R', local = T)
 source('app-helpers.R', local = T)
 
  # dat <- readRDS('../projections/2016/2016-projections-final.rds')
-dat <- readRDS('../projections/2017/2017-projections-final-league-2.rds')
+dat <- readRDS('../projections/2018/2018-league-2-draft-FIX.rds')
 names(dat) <- sapply(dat, function(x) paste(x$first_name, x$last_name))
-teams <- c("JoshGinsberg", "Faisal", "Jason", "Joe", "Dan", "Matt", "Andrew", 
-          "Tom", "MarkDonnelly", "Brett", "MarkBrown")
-all_positions <- c("SP", "RP", "1B", "3B", "2B", "SS", "OF", "C", "DH")
-hitter_positions <- c("1B", "3B", "2B", "SS", "OF", "C", "DH")
+teams <- c("Car Ram Rod", "SaNo Means Yes", "It's Wattles ....bitches", 
+           "Jobu Needs A Refill", "Oh No You Di'int", "Me", "Judge, Jury and Executioner", 
+           "Defending Bronze Medalist", "Pedro gives me a Hardy Johnson", 
+           "Bull Dozier", "Cottage Cheese Industry")
+all_positions <- c("SP", "RP", "1B", "3B", "2B", "SS", "OF", "C")
+hitter_positions <- c("1B", "3B", "2B", "SS", "OF", "C")
 pitcher_positions <- c("SP", "RP")
 
 ## sparklines stuff
