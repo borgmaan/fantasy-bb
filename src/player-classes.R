@@ -19,6 +19,8 @@ Player <- R6Class(
     z_replace = NA,
     z_vorp = NA,
     boot_z_vorp = NA,
+    adp = NA,
+    fg_warp = NA,
     
     ## some functions
     set_pos = function(pos_vec) {
