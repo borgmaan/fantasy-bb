@@ -60,18 +60,18 @@ proj <- lapply(1:nrow(player_ids), function(i) {
   
 })
 
-saveRDS(object = proj, file = 'projections/2020/2020-projections-parsed.rds')
+saveRDS(object = proj, file = 'projections/2021/2021-projections-parsed.rds')
 
 nnul <- sapply(proj, function(x) !is.null(x[[2]]))
 
 proj <- proj[nnul]
-saveRDS(object = proj, file = 'projections/2020/2020-projections-parsed-clean.rds')
+saveRDS(object = proj, file = 'projections/2021/2021-projections-parsed-clean.rds')
 
 
 
 # add in holds from fangraphs
 
-proj <- readRDS('projections/2020/2020-projections-parsed-clean.rds')
+proj <- readRDS('projections/2021/2021-projections-parsed-clean.rds')
 idmap <- read.csv('projections/2019/master.csv', stringsAsFactors = F, colClasses = 'character')
 hproj <- read.csv('projections/2019/FanGraphs Leaderboard (1).csv', stringsAsFactors = F, colClasses = 'character')
 hproj$HLD <- as.numeric(hproj$HLD)

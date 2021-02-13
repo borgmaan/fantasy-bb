@@ -37,7 +37,8 @@ library(parallel)
 source('src/player-classes.R', local = T)
 
 # new projections
-fp_proj <- readRDS('projections/2019/2019-projections-parsed-clean-holds.rds')
+fp_proj <- readRDS('projections/2021/2021-projections-parsed-clean.rds')
+fp_proj <- readRDS('projections/2021/2021-projections-parsed-clean-holds.rds')
 
 # old player objects -- move these to our new class definition
 # hitters <- readRDS('rds/2015-hitter-list.rds')
@@ -123,12 +124,13 @@ for (i in seq_along(fp_proj)) {
 hnms <- sapply(hitters, function(x) paste(x$first_name, x$last_name))
 hdup <- which(duplicated(hnms))
 # hnms[hdup]
-hitters <- hitters[-hdup]
+if (length(hdup)) hitters <- hitters[-hdup]
+
 
 pnms <- sapply(pitchers, function(x) paste(x$first_name, x$last_name))
 pdup <- which(duplicated(pnms))
 # pnms[pdup]
-pitchers <- pitchers[-pdup]
+if (length(pdup)) pitchers <- pitchers[-pdup]
 
 
 
@@ -219,7 +221,7 @@ rownames(hd) <- sapply(hitters, function(x) paste(x$first_name, x$last_name))
 hds <- scale(hd)
 ord <- order(rowSums(hds), decreasing = T)
 
-pdf('reports/2019-category-z-scores-league-2.pdf', height = 40, width = 2)
+pdf('reports/2021-category-z-scores-league-2.pdf', height = 40, width = 2)
 heat_misc(hds[ord,], z_score = F, axis_scale = .4, row_clust = F)
 dev.off()
 
@@ -237,7 +239,7 @@ nms <- c(rownames(hds), rownames(pds))
 nms[which(duplicated(nms))] <- paste(nms[which(duplicated(nms))], "2")
 rownames(fp) = nms
 ord <- order(rowSums(fp, na.rm = T), decreasing = T)
-pdf('reports/2019-category-z-scores-all-league-2.pdf', height = 55, width = 2.5)
+pdf('reports/2021-category-z-scores-all-league-2.pdf', height = 55, width = 2.5)
 heat_misc(fp[ord,], z_score = F, axis_scale = .4, row_clust = F, col_clust = F)
 dev.off()
 
@@ -255,7 +257,7 @@ rownames(hd) <- sapply(hitters, function(x) paste(x$first_name, x$last_name))
 hds <- scale(hd)
 ord <- order(rowSums(hds), decreasing = T)
 
-pdf('reports/2019-category-z-scores-league.pdf', height = 40, width = 2)
+pdf('reports/2021-category-z-scores-league.pdf', height = 40, width = 2)
 heat_misc(hds[ord,], z_score = F, axis_scale = .4, row_clust = F)
 dev.off()
 
@@ -273,7 +275,7 @@ nms <- c(rownames(hds), rownames(pds))
 nms[which(duplicated(nms))] <- paste(nms[which(duplicated(nms))], "2")
 rownames(fp) = nms
 ord <- order(rowSums(fp, na.rm = T), decreasing = T)
-pdf('reports/2019-category-z-scores-all-league.pdf', height = 60, width = 2.5)
+pdf('reports/2021-category-z-scores-all-league.pdf', height = 60, width = 2.5)
 heat_misc(fp[ord,], z_score = F, axis_scale = .4, row_clust = F, col_clust = F)
 dev.off()
 
@@ -444,7 +446,7 @@ rownames(for_plot) <- sapply(updated_players, function(x) paste(x$first_name, x$
 for_plot2 <- for_plot[pord, ]
 for_plot2 <- scale(for_plot2)
 
-pdf('reports/2019-category-z-scores-pos-adj-league-2.pdf', height = 60, width = 2.3)
+pdf('reports/2021-category-z-scores-pos-adj-league-2.pdf', height = 60, width = 2.3)
 heat_misc(for_plot2, z_score = F, axis_scale = .4, row_clust = F, col_clust = F)
 dev.off()
 
@@ -489,7 +491,7 @@ for (i in seq_along(updated_players)) {
 }
 
 
-saveRDS(updated_players, 'projections/2019/2019-projections-final-league-2.rds')
+saveRDS(updated_players, 'projections/2021/2021-projections-final-league-2.rds')
 # updated_players <- readRDS('projections/2019/2019-projections-final-league-2.rds')
 
 nn <- sapply(updated_players, function(x) {
@@ -643,7 +645,7 @@ updated_players$`J.T. Realmuto`$curr_owner <- "Team Bails"
 
 
 
-saveRDS(unname(updated_players), 'projections/2019/2019-final.rds')
+saveRDS(unname(updated_players), 'projections/2021/2021-final.rds')
 
 
 
@@ -660,147 +662,6 @@ dput(sort(unique(sapply(updated_players, function(x) x$curr_owner))))
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-# set all our keeper manually.... there aren't that many
-updated_players$`Cody Bellinger`$curr_owner <- "It's Wattles ....bitches"
-updated_players$`Luis Severino`$curr_owner <- "It's Wattles ....bitches"
-updated_players$`Matt Olson`$curr_owner <- "It's Wattles ....bitches"
-updated_players$`Ozzie Albies`$curr_owner <- "It's Wattles ....bitches"
-
-updated_players$`Giancarlo Stanton`$curr_owner <- "Bull Dozier"
-updated_players$`Yasiel Puig`$curr_owner <- "Bull Dozier"
-updated_players$`Eddie Rosario`$curr_owner <- "Bull Dozier"
-
-updated_players$`Elvis Andrus`$curr_owner <- "Defending Bronze Medalist"
-updated_players$`Jose Quintana`$curr_owner <- "Defending Bronze Medalist"
-updated_players$`Raisel Iglesias`$curr_owner <- "Defending Bronze Medalist"
-updated_players$`Brett Gardner`$curr_owner <- "Defending Bronze Medalist"
-
-updated_players$`Andrew Benintendi`$curr_owner <- "Me"
-updated_players$`Trea Turner`$curr_owner <- "Me"
-
-updated_players$`Marcell Ozuna`$curr_owner <- "Pedro gives me a Hardy Johnson"
-updated_players$`Mike Moustakas`$curr_owner <- "Pedro gives me a Hardy Johnson"
-updated_players$`Aaron Nola`$curr_owner <- "Pedro gives me a Hardy Johnson"
-
-updated_players$`Gary Sanchez`$curr_owner <- "Car Ram Rod"
-updated_players$`Tommy Pham`$curr_owner <- "Car Ram Rod"
-updated_players$`Whit Merrifield`$curr_owner <- "Car Ram Rod"
-updated_players$`Rhys Hoskins`$curr_owner <- "Car Ram Rod"
-
-updated_players$`Willson Contreras`$curr_owner <- "SaNo Means Yes"
-updated_players$`Jose Ramirez`$curr_owner <- "SaNo Means Yes"
-updated_players$`Trevor Story`$curr_owner <- "SaNo Means Yes"
-updated_players$`Paul DeJong`$curr_owner <- "SaNo Means Yes"
-
-updated_players$`Billy Hamilton`$curr_owner <- "Cottage Cheese Industry"
-updated_players$`Yu Darvish`$curr_owner <- "Cottage Cheese Industry"
-
-updated_players$`Byron Buxton`$curr_owner <- "Judge, Jury and Executioner"
-updated_players$`Aaron Judge`$curr_owner <- "Judge, Jury and Executioner"
-updated_players$`Alex Bregman`$curr_owner <- "Judge, Jury and Executioner"
-updated_players$`Rafael Devers`$curr_owner <- "Judge, Jury and Executioner"
-
-updated_players$`Jonathan Schoop`$curr_owner <- "Oh No You Di'int"
-updated_players$`Travis Shaw`$curr_owner <- "Oh No You Di'int"
-updated_players$`Jake Lamb`$curr_owner <- "Oh No You Di'int"
-updated_players$`Jay Bruce`$curr_owner <- "Oh No You Di'int"
-
-updated_players$`Christian Yelich`$curr_owner <- "Jobu Needs A Refill"
-updated_players$`Wil Myers`$curr_owner <- "Jobu Needs A Refill"
-updated_players$`Robbie Ray`$curr_owner <- "Jobu Needs A Refill"
-updated_players$`James Paxton`$curr_owner <- "Jobu Needs A Refill"
-
-
-
-
-saveRDS(updated_players, 'projections/2018/2018-league-2-draft.rds')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# set all our keeper manually.... there aren't that many
-updated_players$`Manny Machado`$curr_owner <- "JoshGinsberg"
-updated_players$`Freddie Freeman`$curr_owner <- "Faisal"
-updated_players$`DJ LeMahieu`$curr_owner <- "Jason"
-updated_players$`Charlie Blackmon`$curr_owner <- "Joe"
-updated_players$`Christian Yelich`$curr_owner <- "Dan"
-updated_players$`Xander Bogaerts`$curr_owner <- "JoshGinsberg"
-updated_players$`Anthony Rendon`$curr_owner <- "JoshGinsberg"
-updated_players$`Daniel Murphy`$curr_owner <- "Matt"
-updated_players$`Hanley Ramirez`$curr_owner <- "Andrew"
-updated_players$`Francisco Lindor`$curr_owner <- "Dan"
-updated_players$`Billy Hamilton`$curr_owner <- "Joe"
-updated_players$`Danny Duffy`$curr_owner <- "Tom"
-updated_players$`Dustin Pedroia`$curr_owner <- "Andrew"
-updated_players$`Noah Syndergaard`$curr_owner <- "Dan"
-updated_players$`Willson Contreras`$curr_owner <- "Faisal"
-updated_players$`Corey Seager`$curr_owner <- "MarkDonnelly"
-updated_players$`Seung-Hwan Oh`$curr_owner <- "Matt"
-updated_players$`A.J. Pollock`$curr_owner <- "Brett"
-updated_players$`Odubel Herrera`$curr_owner <- "Brett"
-updated_players$`Carlos Correa`$curr_owner <- "Tom"
-updated_players$`Evan Longoria`$curr_owner <- "Jason"
-updated_players$`Andrew Benintendi`$curr_owner <- "Andrew"
-updated_players$`Yu Darvish`$curr_owner <- "Joe"
-updated_players$`Jose Ramirez`$curr_owner <- "Faisal"
-updated_players$`Kyle Hendricks`$curr_owner <- "MarkDonnelly"
-updated_players$`Jean Segura`$curr_owner <- "Mark Brown"
-updated_players$`Jose Quintana`$curr_owner <- "Matt"
-updated_players$`Eduardo Nunez`$curr_owner <- "Brett"
-updated_players$`Alex Bregman`$curr_owner <- "Tom"
-updated_players$`J.T. Realmuto`$curr_owner <- "Jason"
-updated_players$`Stephen Piscotty`$curr_owner <- "Andrew"
-updated_players$`Wil Myers`$curr_owner <- "Dan"
-updated_players$`Jonathan Villar`$curr_owner <- "Joe"
-updated_players$`Trevor Story`$curr_owner <- "Faisal"
-updated_players$`Gary Sanchez`$curr_owner <- "MarkDonnelly"
-updated_players$`Roberto Osuna`$curr_owner <- "Mark Brown"
-updated_players$`Mark Trumbo`$curr_owner <- "Matt"
-updated_players$`Jackie Bradley`$curr_owner <- "Brett"
-updated_players$`Trea Turner`$curr_owner <- "Tom"
-
-saveRDS(updated_players, 'projections/2017/2017-projections-final-league-2.rds')
 
 
 
@@ -1056,7 +917,7 @@ for (i in seq_along(updated_players)) {
 }
 
 
-saveRDS(updated_players, 'projections/2018/2018-projections-final-league-2.rds')
+saveRDS(updated_players, 'projections/2021/2021-projections-final-league-2.rds')
 
 nn <- sapply(updated_players, function(x) {
   paste(x$first_name, x$last_name)
@@ -1190,7 +1051,7 @@ updated_players$`James Paxton`$curr_owner <- "Jobu Needs A Refill"
 
 
 
-saveRDS(updated_players, 'projections/2018/2018-league-2-draft.rds')
+saveRDS(updated_players, 'projections/2021/2021-league-2-draft.rds')
 
 
 
